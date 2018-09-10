@@ -1,8 +1,21 @@
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestSoutheros {
+
+    @Before
+    public void setup() {
+        Southeros.register(new Kingdom("LAND", "Panda", null),
+                new Kingdom("WATER", "Octopus", null),
+                new Kingdom("ICE", "Mammoth", null),
+                new Kingdom("AIR", "Owl", null),
+                new Kingdom("FIRE", "Dragon", null),
+                new Kingdom("SPACE", "Gorilla", "Sham"));
+
+    }
 
     @Test
     public void should_have_6_kingdoms() {
@@ -27,5 +40,10 @@ public class TestSoutheros {
 
         assertThat(Southeros.ruler()).isEqualTo(space.king());
 
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Southeros.clearKingdoms();
     }
 }

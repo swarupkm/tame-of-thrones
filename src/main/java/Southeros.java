@@ -1,8 +1,12 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Southeros {
+
+    private static Set<Kingdom> kingdoms = new HashSet<>();
 
     public static String ruler() {
         Kingdom kingdom = kingdoms().stream().filter(Kingdom::isKingTheRuler).findFirst().orElse(Kingdom.emptyKingdom());
@@ -10,36 +14,20 @@ public class Southeros {
 
     }
 
-    public static List<Kingdom> kingdoms() {
-        return KingdomSet.getKingdoms();
+    public static Set<Kingdom> kingdoms() {
+        return kingdoms;
     }
 
     public static Kingdom getKingdom(String name) {
         return kingdoms().stream().filter(kingdom -> kingdom.name().equalsIgnoreCase(name)).findFirst().orElse(Kingdom.emptyKingdom());
     }
-}
 
-enum KingdomSet {
-    LAND(new Kingdom("LAND", "Panda", null)),
-    WATER(new Kingdom("WATER", "Octopus", null)),
-    ICE(new Kingdom("ICE", "Mammoth", null)),
-    AIR(new Kingdom("AIR", "Owl", null)),
-    FIRE(new Kingdom("FIRE", "Dragon", null)),
-    SPACE(new Kingdom("SPACE", "Gorilla", "Sham"));
-
-    private final Kingdom kingdom;
-
-    KingdomSet(Kingdom kingdom) {
-
-        this.kingdom = kingdom;
+    public static void register(Kingdom... kingdoms) {
+        Arrays.asList(kingdoms).forEach(k -> Southeros.kingdoms.add(k));
     }
 
-    static List<Kingdom> getKingdoms() {
-        return Arrays.asList(KingdomSet.values()).stream().map(KingdomSet::getKingdom).collect(Collectors.toList());
-    }
-
-    private Kingdom getKingdom() {
-        return kingdom;
+    public static void clearKingdoms() {
+        kingdoms.clear();
     }
 }
 
