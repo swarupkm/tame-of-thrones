@@ -6,27 +6,35 @@ import java.util.Set;
 
 public class Southeros {
 
-    private static Set<Kingdom> kingdoms = new HashSet<>();
+    private static Southeros southeros = new Southeros();
 
-    public static String ruler() {
+    private Set<Kingdom> kingdoms = new HashSet<>();
+
+    //Singleton , eager initialization since there is no cost / dependency involved during initialization
+    //Southeros can be converted to a Universe class if situation demands in the future
+    public static Southeros get() {
+        return southeros;
+    }
+
+    public String ruler() {
         Kingdom kingdom = kingdoms().stream().filter(Kingdom::isKingTheRuler).findFirst().orElse(Kingdom.emptyKingdom());
         return kingdom.king();
 
     }
 
-    public static Set<Kingdom> kingdoms() {
+    public Set<Kingdom> kingdoms() {
         return kingdoms;
     }
 
-    public static Kingdom getKingdom(String name) {
+    public Kingdom getKingdom(String name) {
         return kingdoms().stream().filter(kingdom -> kingdom.name().equalsIgnoreCase(name)).findFirst().orElse(Kingdom.emptyKingdom());
     }
 
-    public static void register(Kingdom... kingdoms) {
-        Arrays.asList(kingdoms).forEach(k -> Southeros.kingdoms.add(k));
+    public void register(Kingdom... kingdoms) {
+        this.kingdoms.addAll(Arrays.asList(kingdoms));
     }
 
-    public static void clearKingdoms() {
+    public void clearKingdoms() {
         kingdoms.clear();
     }
 }
