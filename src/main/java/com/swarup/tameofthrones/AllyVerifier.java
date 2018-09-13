@@ -1,3 +1,5 @@
+package com.swarup.tameofthrones;
+
 import java.util.HashMap;
 
 public class AllyVerifier {

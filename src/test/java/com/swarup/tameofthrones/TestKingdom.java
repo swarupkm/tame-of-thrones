@@ -1,8 +1,10 @@
+package com.swarup.tameofthrones;
+
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class KingdomTest {
+public class TestKingdom {
     @Test
     public void should_add_alies_to_kingdom() {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);

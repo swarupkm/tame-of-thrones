@@ -1,8 +1,10 @@
+package com.swarup.tameofthrones;
+
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class KingdomMessageCombinationTest {
+public class TestKingdomMessageCombination {
     @Test
     public void should_send_message_to_another_kingdom_which_has_emblem_characters_and_be_successful() {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);

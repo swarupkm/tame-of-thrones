@@ -1,10 +1,12 @@
+package com.swarup.tameofthrones;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class IntegrationTest {
+public class TestIntegration {
 
     @Before
     public void setup() {

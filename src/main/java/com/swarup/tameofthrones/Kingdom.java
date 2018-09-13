@@ -1,3 +1,5 @@
+package com.swarup.tameofthrones;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -70,7 +72,7 @@ class Kingdom {
 
     @Override
     public String toString() {
-        return "Kingdom{" +
+        return "com.swarup.tameofthrones.Kingdom{" +
                 "name='" + name + '\'' +
                 ", emblem='" + emblem + '\'' +
                 '}';
