@@ -8,7 +8,7 @@ public class KingdomMessageCombinationTest {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
         Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
 
-        kingdom1.sendMessageTo(kingdom2 , "snakensake");
+        kingdom1.sendMessageTo(kingdom2, "snakensake");
 
         assertThat(kingdom1.hasAlly(kingdom2)).isTrue();
 
@@ -19,7 +19,7 @@ public class KingdomMessageCombinationTest {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
         Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
 
-        kingdom1.sendMessageTo(kingdom2 , "htgerbx");
+        kingdom1.sendMessageTo(kingdom2, "htgerbx");
 
         assertThat(kingdom1.hasAlly(kingdom2)).isFalse();
 
@@ -29,7 +29,7 @@ public class KingdomMessageCombinationTest {
     public void should_not_send_message_to_self() {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
 
-        kingdom1.sendMessageTo(kingdom1 , "htgerbx");
+        kingdom1.sendMessageTo(kingdom1, "htgerbx");
 
     }
 }

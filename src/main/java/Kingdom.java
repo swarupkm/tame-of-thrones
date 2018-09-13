@@ -16,6 +16,10 @@ class Kingdom {
         this.king = king;
     }
 
+    public static Kingdom emptyKingdom() {
+        return new Kingdom(null, null, "None");
+    }
+
     public void addAlly(Kingdom otherKingdom) {
         if (otherKingdom.name() == null || otherKingdom.name() == this.name()) {
             throw new InvalidAllyException();
@@ -35,7 +39,6 @@ class Kingdom {
         return allies;
     }
 
-
     public boolean isKingTheRuler() {
         if (allies.size() >= MIN_ALLIES_FOR_BEING_RULER)
             return true;
@@ -48,10 +51,6 @@ class Kingdom {
 
     public String name() {
         return name;
-    }
-
-    public static Kingdom emptyKingdom() {
-        return new Kingdom(null, null, "None");
     }
 
     public boolean sendMessageTo(Kingdom otherKingdom, String message) {
