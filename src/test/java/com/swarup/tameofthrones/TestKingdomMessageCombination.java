@@ -1,5 +1,6 @@
 package com.swarup.tameofthrones;
 
+import com.swarup.tameofthrones.exceptions.InvalidMessageException;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

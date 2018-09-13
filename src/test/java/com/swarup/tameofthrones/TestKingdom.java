@@ -1,5 +1,6 @@
 package com.swarup.tameofthrones;
 
+import com.swarup.tameofthrones.exceptions.InvalidAllyException;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
