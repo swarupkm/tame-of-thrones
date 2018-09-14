@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-class Kingdom {
+public class Kingdom {
     private static final int MIN_ALLIES_FOR_BEING_RULER = 3;
     private final String name;
     private final String emblem;
@@ -29,11 +29,7 @@ class Kingdom {
         if (otherKingdom.name() == null || otherKingdom.name() == this.name()) {
             throw new InvalidAllyException();
         }
-
-        if (!hasAlly(otherKingdom)) {
-            allies.add(otherKingdom);
-            otherKingdom.addAlly(this);
-        }
+        allies.add(otherKingdom);
     }
 
     boolean hasAlly(Kingdom otherKingdom) {
@@ -42,6 +38,10 @@ class Kingdom {
 
     public Set<Kingdom> allies() {
         return allies;
+    }
+
+    public int alliesSize() {
+        return allies.size();
     }
 
     public boolean isKingTheRuler() {
@@ -75,7 +75,7 @@ class Kingdom {
 
     @Override
     public String toString() {
-        return "com.swarup.tameofthrones.Kingdom{" +
+        return "Kingdom{" +
                 "name='" + name + '\'' +
                 ", emblem='" + emblem + '\'' +
                 '}';

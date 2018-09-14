@@ -17,10 +17,9 @@ public class Southeros {
     }
 
     public String ruler() {
-        Kingdom kingdom = kingdoms().stream().filter(Kingdom::isKingTheRuler).findFirst().orElse(Kingdom.emptyKingdom());
-        return kingdom.king();
-
+        return rulingKingdom().king();
     }
+
 
     public Set<Kingdom> kingdoms() {
         return kingdoms;
@@ -36,6 +35,10 @@ public class Southeros {
 
     public void clearKingdoms() {
         kingdoms.clear();
+    }
+
+    public Kingdom rulingKingdom() {
+        return kingdoms().stream().filter(Kingdom::isKingTheRuler).findFirst().orElse(Kingdom.emptyKingdom());
     }
 }
 

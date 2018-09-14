@@ -13,7 +13,6 @@ public class TestKingdom {
         kingdom1.addAlly(kingdom2);
 
         assertThat(kingdom1.hasAlly(kingdom2)).isTrue();
-        assertThat(kingdom2.hasAlly(kingdom1)).isTrue();
     }
 
     @Test(expected = InvalidAllyException.class)
