@@ -2,7 +2,7 @@ package com.swarup.tameofthrones;
 
 import java.util.HashMap;
 
-public class AllyVerifier {
+public class MessageVerifier {
 
     boolean verify(Kingdom prospectKingdom, String message) {
         HashMap<String, Integer> messageMap = characterIntegerHashMap(message);

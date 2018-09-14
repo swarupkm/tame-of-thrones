@@ -20,6 +20,8 @@ public class TestSoutheros {
                 new Kingdom("FIRE", "Dragon", null),
                 new Kingdom("SPACE", "Gorilla", "Sham"));
 
+        southeros.setRulerFindingStratergy(RulerStrategies::atleast3AlliesRulerStratergy);
+
     }
 
     @Test
@@ -33,7 +35,7 @@ public class TestSoutheros {
     }
 
     @Test
-    public void should_have_rules_when_one_kingdom_has_atleast_3_allies() {
+    public void should_have_ruler_when_one_kingdom_has_atleast_3_allies() {
         Kingdom space = southeros.getKingdom("SPACE");
         Kingdom water = southeros.getKingdom("WATER");
         Kingdom ice = southeros.getKingdom("ICE");
@@ -48,7 +50,7 @@ public class TestSoutheros {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         southeros.clearKingdoms();
     }
 }

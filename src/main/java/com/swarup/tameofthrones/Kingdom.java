@@ -8,10 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Kingdom {
-    private static final int MIN_ALLIES_FOR_BEING_RULER = 3;
+
     private final String name;
     private final String emblem;
-    private final AllyVerifier allyVerifier = new AllyVerifier();
     private String king;
     private Set<Kingdom> allies = new HashSet<>();
 
@@ -21,41 +20,39 @@ public class Kingdom {
         this.king = king;
     }
 
-    public static Kingdom emptyKingdom() {
-        return new Kingdom(null, null, "None");
-    }
-
-    public void addAlly(Kingdom otherKingdom) {
-        if (otherKingdom.name() == null || otherKingdom.name() == this.name()) {
-            throw new InvalidAllyException();
-        }
-        allies.add(otherKingdom);
-    }
-
-    boolean hasAlly(Kingdom otherKingdom) {
-        return allies.contains(otherKingdom);
+    public String king() {
+        return king;
     }
 
     public Set<Kingdom> allies() {
         return allies;
     }
 
-    public int alliesSize() {
-        return allies.size();
-    }
-
-    public boolean isKingTheRuler() {
-        if (allies.size() >= MIN_ALLIES_FOR_BEING_RULER)
-            return true;
-        return false;
-    }
-
-    public String king() {
-        return king;
-    }
-
     public String name() {
         return name;
+    }
+
+    public String emblem() {
+        return emblem;
+    }
+
+    public void addAlly(Kingdom otherKingdom) {
+        if (otherKingdom.name() == null || otherKingdom.name() == this.name()) {
+            throw new InvalidAllyException("cannot add self has ally");
+        }
+
+        if (!hasAlly(otherKingdom)) {
+            allies.add(otherKingdom);
+            otherKingdom.addAlly(this);
+        }
+    }
+
+    boolean hasAlly(Kingdom otherKingdom) {
+        return allies.contains(otherKingdom);
+    }
+
+    public int alliesSize() {
+        return allies.size();
     }
 
     public boolean sendMessageTo(Kingdom otherKingdom, String message) {
@@ -63,14 +60,15 @@ public class Kingdom {
             throw new InvalidMessageException();
         }
 
-        boolean hasResponded = allyVerifier.verify(otherKingdom, message);
+        boolean hasResponded = new MessageVerifier().verify(otherKingdom, message);
         if (hasResponded)
             addAlly(otherKingdom);
+
         return hasResponded;
     }
 
-    public String emblem() {
-        return emblem;
+    public static Kingdom emptyKingdom() {
+        return new Kingdom(null, null, "None");
     }
 
     @Override

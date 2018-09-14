@@ -1,6 +1,7 @@
 package com.swarup.tameofthrones.problem1;
 
 import com.swarup.tameofthrones.Kingdom;
+import com.swarup.tameofthrones.RulerStrategies;
 import com.swarup.tameofthrones.Southeros;
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +22,8 @@ public class TestIntegration {
                 new Kingdom("AIR", "Owl", null),
                 new Kingdom("FIRE", "Dragon", null),
                 new Kingdom("SPACE", "Gorilla", "Sham"));
+
+        southeros.setRulerFindingStratergy(RulerStrategies::atleast3AlliesRulerStratergy);
 
     }
 

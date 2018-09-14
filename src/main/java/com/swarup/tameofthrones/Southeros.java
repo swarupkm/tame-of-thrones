@@ -1,5 +1,7 @@
 package com.swarup.tameofthrones;
 
+import com.swarup.tameofthrones.exceptions.NoStrategyFoundException;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,7 @@ public class Southeros {
     private static Southeros southeros = new Southeros();
 
     private Set<Kingdom> kingdoms = new HashSet<>();
+    private RulerStrategy strategy;
 
     //Singleton , eager initialization since there is no cost / dependency involved during initialization
     //Southeros can be converted to a Universe class if situation demands in the future
@@ -38,7 +41,16 @@ public class Southeros {
     }
 
     public Kingdom rulingKingdom() {
-        return kingdoms().stream().filter(Kingdom::isKingTheRuler).findFirst().orElse(Kingdom.emptyKingdom());
+        return rulingKingdomAmong(this.kingdoms);
+    }
+
+    public Kingdom rulingKingdomAmong(Set<Kingdom> kingdoms){
+        if (strategy == null) throw new NoStrategyFoundException();
+        return this.strategy.getRuler(kingdoms);
+    }
+
+    public void setRulerFindingStratergy(RulerStrategy stratergy) {
+        this.strategy = stratergy;
     }
 }
 

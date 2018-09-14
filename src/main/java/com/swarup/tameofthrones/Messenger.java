@@ -1,6 +1,5 @@
-package com.swarup.tameofthrones.problem2;
+package com.swarup.tameofthrones;
 
-import com.swarup.tameofthrones.Kingdom;
 import com.swarup.tameofthrones.exceptions.InvalidMessageException;
 
 import java.io.File;

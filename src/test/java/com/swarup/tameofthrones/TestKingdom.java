@@ -3,6 +3,11 @@ package com.swarup.tameofthrones;
 import com.swarup.tameofthrones.exceptions.InvalidAllyException;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.swarup.tameofthrones.RulerStrategies.atleast3AlliesRulerStratergy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class TestKingdom {
@@ -13,6 +18,7 @@ public class TestKingdom {
         kingdom1.addAlly(kingdom2);
 
         assertThat(kingdom1.hasAlly(kingdom2)).isTrue();
+        assertThat(kingdom2.hasAlly(kingdom1)).isTrue();
     }
 
     @Test(expected = InvalidAllyException.class)
@@ -33,11 +39,16 @@ public class TestKingdom {
         Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
         Kingdom kingdom3 = new Kingdom("WATER", "fish", null);
         Kingdom kingdom4 = new Kingdom("WOOD", "snake", null);
+
+        Set<Kingdom> kingdomSet = new HashSet<>();
+        kingdomSet.addAll(Arrays.asList(kingdom1, kingdom2, kingdom3, kingdom4));
+
         kingdom1.addAlly(kingdom2);
         kingdom1.addAlly(kingdom3);
         kingdom1.addAlly(kingdom4);
 
-        assertThat(kingdom1.isKingTheRuler()).isTrue();
+        assertThat(atleast3AlliesRulerStratergy(kingdomSet)).isEqualTo(kingdom1);
+
     }
 
     @Test
@@ -45,10 +56,15 @@ public class TestKingdom {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
         Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
         Kingdom kingdom3 = new Kingdom("WATER", "fish", null);
+
+        Set<Kingdom> kingdomSet = new HashSet<>();
+        kingdomSet.addAll(Arrays.asList(kingdom1, kingdom2, kingdom3));
+
         kingdom1.addAlly(kingdom2);
         kingdom1.addAlly(kingdom3);
 
-        assertThat(kingdom1.isKingTheRuler()).isFalse();
+
+        assertThat(atleast3AlliesRulerStratergy(kingdomSet)).isEqualTo(Kingdom.emptyKingdom());
     }
 
 }

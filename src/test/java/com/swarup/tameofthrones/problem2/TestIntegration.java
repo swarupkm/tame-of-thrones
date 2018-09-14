@@ -1,6 +1,9 @@
 package com.swarup.tameofthrones.problem2;
 
+import com.swarup.tameofthrones.Competition;
 import com.swarup.tameofthrones.Kingdom;
+import com.swarup.tameofthrones.Messenger;
+import com.swarup.tameofthrones.RulerStrategies;
 import com.swarup.tameofthrones.Southeros;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +23,8 @@ public class TestIntegration {
                 new Kingdom("FIRE", "Dragon", null),
                 new Kingdom("SPACE", "Gorilla", "Sham"));
 
+        southeros.setRulerFindingStratergy(RulerStrategies::highPriestRulerStrategy);
+
         messenger.getMessagesFromFile("messages.txt");
     }
 
@@ -38,6 +43,6 @@ public class TestIntegration {
         System.out.println("Allies of air" + " " + air.allies());
         System.out.println("Allies of ice" + " " + ice.allies());
 
-        System.out.println(competition.result());
+        System.out.println(southeros.rulingKingdomAmong(competition.competingKingdoms()));
     }
 }

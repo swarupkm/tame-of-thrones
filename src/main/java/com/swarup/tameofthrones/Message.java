@@ -1,15 +1,13 @@
-package com.swarup.tameofthrones.problem2;
-
-import com.swarup.tameofthrones.Kingdom;
+package com.swarup.tameofthrones;
 
 public class Message {
     private Kingdom sender;
-    private Kingdom reciever;
+    private Kingdom receiver;
     private String message;
 
-    public Message(Kingdom sender, Kingdom reciever, String message) {
+    public Message(Kingdom sender, Kingdom receiver, String message) {
         this.sender = sender;
-        this.reciever = reciever;
+        this.receiver = receiver;
         this.message = message;
     }
 
@@ -17,8 +15,8 @@ public class Message {
         return sender;
     }
 
-    public Kingdom getReciever() {
-        return reciever;
+    public Kingdom getReceiver() {
+        return receiver;
     }
 
     public String getMessage() {
