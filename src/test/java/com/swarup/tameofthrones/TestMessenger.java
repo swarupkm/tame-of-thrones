@@ -42,6 +42,11 @@ public class TestMessenger {
         assertThat(messages).isEmpty();
     }
 
+    @Test
+    public void should_retrieve_message_from_message_files() {
+        assertThat(messenger.messages()).contains(MESSAGE);
+    }
+
     private Set<Kingdom> kingdomSet(Kingdom... receivers) {
         Set<Kingdom> kingdoms = new HashSet<>();
         Stream.of(receivers).forEach(kingdom -> kingdoms.add(kingdom));

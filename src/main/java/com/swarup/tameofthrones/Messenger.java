@@ -41,4 +41,7 @@ public class Messenger {
         }
     }
 
+    public List<String> messages() {
+        return new ArrayList<>(messages);
+    }
 }
