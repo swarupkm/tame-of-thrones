@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.swarup.tameofthrones.RulerStrategies.atleast3AlliesRulerStratergy;
+import static com.swarup.tameofthrones.rulerstratergy.RulerStrategies.atleast3AlliesRulerStrategy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class TestKingdom {
@@ -30,7 +30,7 @@ public class TestKingdom {
     @Test(expected = InvalidAllyException.class)
     public void should_not_add_empty_kingdom_as_ally() {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
-        kingdom1.addAlly(Kingdom.emptyKingdom());
+        kingdom1.addAlly(Kingdom.nullKingdom());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class TestKingdom {
         kingdom1.addAlly(kingdom3);
         kingdom1.addAlly(kingdom4);
 
-        assertThat(atleast3AlliesRulerStratergy(kingdomSet)).isEqualTo(kingdom1);
+        assertThat(atleast3AlliesRulerStrategy(kingdomSet)).isEqualTo(kingdom1);
 
     }
 
@@ -64,7 +64,7 @@ public class TestKingdom {
         kingdom1.addAlly(kingdom3);
 
 
-        assertThat(atleast3AlliesRulerStratergy(kingdomSet)).isEqualTo(Kingdom.emptyKingdom());
+        assertThat(atleast3AlliesRulerStrategy(kingdomSet)).isEqualTo(Kingdom.nullKingdom());
     }
 
 }

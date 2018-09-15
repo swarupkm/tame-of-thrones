@@ -16,11 +16,11 @@ public class Messenger {
 
     public List<Message> generateMessages(Kingdom senderKingdom, Set<Kingdom> receivingKingdoms) {
         List<Message> randomMessageList = new ArrayList<>();
+        receivingKingdoms.remove(senderKingdom);
         receivingKingdoms.forEach(receivingKingdom -> {
-            if (senderKingdom != receivingKingdom) {
-                Message message = new Message(senderKingdom, receivingKingdom, randomMessage());
-                randomMessageList.add(message);
-            }
+            Message message = new Message(senderKingdom, receivingKingdom, randomMessage());
+            randomMessageList.add(message);
+
         });
         return randomMessageList;
     }
@@ -31,7 +31,7 @@ public class Messenger {
         return messages.get(i);
     }
 
-    public void getMessagesFromFile(String path) {
+    public void prepareMessagesFromFile(String path) {
         File file = new File(path);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine())

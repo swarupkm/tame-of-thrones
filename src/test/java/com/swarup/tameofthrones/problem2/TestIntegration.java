@@ -1,10 +1,10 @@
 package com.swarup.tameofthrones.problem2;
 
-import com.swarup.tameofthrones.Competition;
+import com.swarup.tameofthrones.BallotCompetition;
 import com.swarup.tameofthrones.Kingdom;
 import com.swarup.tameofthrones.Messenger;
-import com.swarup.tameofthrones.RulerStrategies;
 import com.swarup.tameofthrones.Southeros;
+import com.swarup.tameofthrones.rulerstratergy.RulerStrategies;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class TestIntegration {
 
         southeros.setRulerFindingStratergy(RulerStrategies::highPriestRulerStrategy);
 
-        messenger.getMessagesFromFile("messages.txt");
+        messenger.prepareMessagesFromFile("messages.txt");
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TestIntegration {
         Kingdom air = southeros.getKingdom("AIR");
         Kingdom ice = southeros.getKingdom("ICE");
 
-        Competition competition = new Competition(southeros, messenger);
+        BallotCompetition competition = new BallotCompetition(southeros, messenger);
         competition.register(space, air, ice);
 
         competition.start();

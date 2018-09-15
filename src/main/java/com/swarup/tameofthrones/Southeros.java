@@ -1,6 +1,7 @@
 package com.swarup.tameofthrones;
 
 import com.swarup.tameofthrones.exceptions.NoStrategyFoundException;
+import com.swarup.tameofthrones.rulerstratergy.RulerStrategy;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,7 +30,7 @@ public class Southeros {
     }
 
     public Kingdom getKingdom(String name) {
-        return kingdoms().stream().filter(kingdom -> kingdom.name().equalsIgnoreCase(name)).findFirst().orElse(Kingdom.emptyKingdom());
+        return kingdoms().stream().filter(kingdom -> kingdom.name().equalsIgnoreCase(name)).findFirst().orElse(Kingdom.nullKingdom());
     }
 
     public void register(Kingdom... kingdoms) {
@@ -44,7 +45,7 @@ public class Southeros {
         return rulingKingdomAmong(this.kingdoms);
     }
 
-    public Kingdom rulingKingdomAmong(Set<Kingdom> kingdoms){
+    public Kingdom rulingKingdomAmong(Set<Kingdom> kingdoms) {
         if (strategy == null) throw new NoStrategyFoundException();
         return this.strategy.getRuler(kingdoms);
     }

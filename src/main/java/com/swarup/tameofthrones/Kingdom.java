@@ -20,6 +20,15 @@ public class Kingdom {
         this.king = king;
     }
 
+    public Kingdom(String name, String emblem) {
+        this.name = name;
+        this.emblem = emblem;
+    }
+
+    public static Kingdom nullKingdom() {
+        return new Kingdom(null, null, "None");
+    }
+
     public String king() {
         return king;
     }
@@ -37,7 +46,7 @@ public class Kingdom {
     }
 
     public void addAlly(Kingdom otherKingdom) {
-        if (otherKingdom.name() == null || otherKingdom == this ) {
+        if (otherKingdom.name() == null || otherKingdom == this) {
             throw new InvalidAllyException("cannot add self has ally");
         }
 
@@ -67,8 +76,8 @@ public class Kingdom {
         return hasResponded;
     }
 
-    public static Kingdom emptyKingdom() {
-        return new Kingdom(null, null, "None");
+    public void clearAllies(){
+        this.allies.clear();
     }
 
     @Override

@@ -1,4 +1,6 @@
-package com.swarup.tameofthrones;
+package com.swarup.tameofthrones.rulerstratergy;
+
+import com.swarup.tameofthrones.Kingdom;
 
 import java.util.Set;
 

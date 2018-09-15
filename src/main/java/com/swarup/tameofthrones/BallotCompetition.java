@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Competition {
+public class BallotCompetition {
     private final Southeros universe;
     private final Messenger messenger;
     private Set<Kingdom> competingKingdoms;
     private Set<Kingdom> allegianceProviders;
 
-    public Competition(Southeros southeros, Messenger messenger) {
+    public BallotCompetition(Southeros southeros, Messenger messenger) {
         this.universe = southeros;
         this.messenger = messenger;
         this.competingKingdoms = new HashSet<>();
@@ -42,4 +42,14 @@ public class Competition {
     public Set<Kingdom> competingKingdoms() {
         return new HashSet<>(competingKingdoms);
     }
+
+    public Set<Kingdom> allegianceProviders() {
+        return new HashSet<>(allegianceProviders);
+    }
+
+    public void resetAllegiances(){
+        allegianceProviders.clear();
+        universe.kingdoms().forEach(Kingdom::clearAllies);
+    }
+
 }
