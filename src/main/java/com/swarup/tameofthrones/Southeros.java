@@ -25,7 +25,7 @@ public class Southeros {
 
 
     public Set<Kingdom> kingdoms() {
-        return kingdoms;
+        return new HashSet<>(kingdoms);
     }
 
     public Kingdom getKingdom(String name) {

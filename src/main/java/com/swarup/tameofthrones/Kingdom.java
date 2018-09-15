@@ -25,7 +25,7 @@ public class Kingdom {
     }
 
     public Set<Kingdom> allies() {
-        return allies;
+        return new HashSet<>(allies);
     }
 
     public String name() {
@@ -37,7 +37,7 @@ public class Kingdom {
     }
 
     public void addAlly(Kingdom otherKingdom) {
-        if (otherKingdom.name() == null || otherKingdom.name() == this.name()) {
+        if (otherKingdom.name() == null || otherKingdom == this ) {
             throw new InvalidAllyException("cannot add self has ally");
         }
 

@@ -40,6 +40,6 @@ public class Competition {
     }
 
     public Set<Kingdom> competingKingdoms() {
-        return competingKingdoms;
+        return new HashSet<>(competingKingdoms);
     }
 }

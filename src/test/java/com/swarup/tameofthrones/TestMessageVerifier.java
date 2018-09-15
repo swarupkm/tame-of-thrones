@@ -18,6 +18,17 @@ public class TestKingdomMessageCombination {
     }
 
     @Test
+    public void should_recieving_kingdom_should_have_sender_kingdom_as_ally_after_successfull_message() {
+        Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
+        Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
+
+        kingdom1.sendMessageTo(kingdom2, "snakensake");
+
+        assertThat(kingdom2.hasAlly(kingdom1)).isTrue();
+
+    }
+
+    @Test
     public void should_send_message_to_another_kingdom_which_does_not_have_emblem_characters_and_not_be_successful() {
         Kingdom kingdom1 = new Kingdom("ICE", "Whale", null);
         Kingdom kingdom2 = new Kingdom("FIRE", "snake", null);
