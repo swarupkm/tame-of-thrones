@@ -55,13 +55,13 @@ public class TestIntegration {
 
         when(messenger.generateMessages(refEq(ice), any())).thenReturn(messages(ice, "Panda Dragon"));
         when(messenger.generateMessages(refEq(space), any())).thenReturn(messages(space, "Octopus"));
-        when(messenger.generateMessages(refEq(air), any())).thenReturn(messages(air, "Octopus"));
+        when(messenger.generateMessages(refEq(air), any())).thenReturn(messages(air, FAILED_MESSAGE)); // This change was made after finding error in sample i/o 1 provided in the https://www.geektrust.in/api/pdf/open/PS5
 
         competition.start();
 
         assertThat(ice.alliesSize()).isEqualTo(2);
         assertThat(space.alliesSize()).isEqualTo(1);
-        assertThat(air.alliesSize()).isEqualTo(1);
+        assertThat(air.alliesSize()).isEqualTo(0); // // This change was made after finding error in sample i/o 1 provided in the https://www.geektrust.in/api/pdf/open/PS5
 
         Kingdom rulingKingdom = southeros.rulingKingdomAmong(competition.competingKingdoms());
 

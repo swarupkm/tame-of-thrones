@@ -17,8 +17,6 @@ import static org.mockito.Mockito.when;
 public class TestBallotCompetition {
 
     private static final String SUCCESS_MESSAGE_FOR_LAND_AND_WATER = "PandaOctopus";
-    private static final String FAILURE_MESSSAGE = "zzzzzzzzzzzzzzzzzzzzzzzzzz";
-    private static final String SUCCESS_MESSAGE_FOR_ICE_AND_AIR = "OwlMammoth";
     private Southeros southeros;
 
     private BallotCompetition competition;
@@ -39,7 +37,7 @@ public class TestBallotCompetition {
     }
 
     @Test
-    public void should_all_non_compeititors_to_get_allied_after_message_is_verified() {
+    public void should_have_allegience_list_and_not_allow_them_to_participate_once_they_give_allegiance() {
         Kingdom fire = southeros.getKingdom("FIRE");
         Kingdom space = southeros.getKingdom("SPACE");
         Kingdom land = southeros.getKingdom("LAND");
@@ -47,15 +45,17 @@ public class TestBallotCompetition {
 
         competition.register(fire, space);
 
-        when(messenger.generateMessages(refEq(fire), any())).thenReturn(messages(fire, SUCCESS_MESSAGE_FOR_LAND_AND_WATER));
-        when(messenger.generateMessages(refEq(space), any())).thenReturn(messages(space, FAILURE_MESSSAGE));
+        when(messenger.generateMessages(refEq(fire), any())).thenReturn(messages(fire));
+        when(messenger.generateMessages(refEq(space), any())).thenReturn(messages(space));
 
         competition.start();
 
-        assertThat(fire.allies()).containsExactlyInAnyOrder(land, water);
+        assertThat(competition.allegianceProviders()).containsExactlyInAnyOrder(land, water);
 
         assertThat(fire.alliesSize()).isEqualTo(2);
         assertThat(space.alliesSize()).isEqualTo(0);
+        assertThat(land.alliesSize()).isEqualTo(1);
+        assertThat(water.alliesSize()).isEqualTo(1);
     }
 
     @Test
@@ -65,39 +65,41 @@ public class TestBallotCompetition {
 
         competition.register(land, water);
 
-        when(messenger.generateMessages(refEq(land), any())).thenReturn(messages(land, SUCCESS_MESSAGE_FOR_LAND_AND_WATER));
-        when(messenger.generateMessages(refEq(water), any())).thenReturn(messages(water, SUCCESS_MESSAGE_FOR_LAND_AND_WATER));
-
-        competition.start();
+        when(messenger.generateMessages(refEq(land), any())).thenReturn(messages(land));
+        when(messenger.generateMessages(refEq(water), any())).thenReturn(messages(water));
 
         assertThat(land.alliesSize()).isEqualTo(0);
         assertThat(water.alliesSize()).isEqualTo(0);
+        assertThat(competition.allegianceProviders()).size().isEqualTo(0);
+
+
     }
 
     @Test
-    public void should_clear_allegiance_upon_reset_of_allegiances() {
+    public void should_clear_allies_and_allegiance_upon_reset_of_allegiances() {
         Kingdom fire = southeros.getKingdom("FIRE");
         Kingdom space = southeros.getKingdom("SPACE");
 
         competition.register(fire, space);
 
-        when(messenger.generateMessages(refEq(fire), any())).thenReturn(messages(fire, SUCCESS_MESSAGE_FOR_LAND_AND_WATER));
-        when(messenger.generateMessages(refEq(space), any())).thenReturn(messages(space, SUCCESS_MESSAGE_FOR_ICE_AND_AIR));
+        when(messenger.generateMessages(refEq(fire), any())).thenReturn(messages(fire));
+        when(messenger.generateMessages(refEq(space), any())).thenReturn(messages(space));
 
         competition.start();
         competition.resetAllegiances();
 
+        assertThat(competition.allegianceProviders()).size().isEqualTo(0);
         southeros.kingdoms().forEach(kingdom -> assertThat(kingdom.alliesSize()).isEqualTo(0));
 
 
     }
 
-    private List<Message> messages(Kingdom senderKingdom, String inputMessage) {
+    private List<Message> messages(Kingdom senderKingdom) {
         List<Message> messageList = new ArrayList<>();
         Set<Kingdom> receivingKingdoms = southeros.kingdoms();
         receivingKingdoms.remove(senderKingdom);
         receivingKingdoms.forEach(receivingKingdom -> {
-            Message message = new Message(senderKingdom, receivingKingdom, inputMessage);
+            Message message = new Message(senderKingdom, receivingKingdom, SUCCESS_MESSAGE_FOR_LAND_AND_WATER);
             messageList.add(message);
         });
         return messageList;

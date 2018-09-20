@@ -1,5 +1,10 @@
 # tame-of-thrones
 
+UPDATE
+------
+
+After discussion with Clarie, i have updated the error in sample IO and added the allegiance logic.
+
 This repo is meant for solving the geektrust problem statement using test driven style.
 
 The problem statement is based on the link 'https://www.geektrust.in/api/pdf/open/PS5'.
@@ -12,6 +17,4 @@ The second integration relies on mocking library to generate random data, so tha
 However unit tests have been added with sample message files. Their the files are read and Ballot messages are generated.
 
 git log can be found to see how the progress was made.
-
-[WIP] Commandline way of providing I/O is yet to be build based on feedback.
 
