@@ -20,6 +20,8 @@ public class Southeros {
         return southeros;
     }
 
+    private Southeros(){}
+
     public String ruler() {
         return rulingKingdom().king();
     }
